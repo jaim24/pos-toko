@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OmniPOS - Cashier Terminal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-variant": "#dfe3e7",
+                    "tertiary-fixed": "#ffdadb",
+                    "tertiary-fixed-dim": "#ffb2b7",
+                    "outline-variant": "#c5c6cd",
+                    "tertiary-container": "#590016",
+                    "background": "#f6fafe",
+                    "on-primary-fixed": "#111c2d",
+                    "on-primary-container": "#8590a6",
+                    "error": "#ba1a1a",
+                    "secondary": "#006c49",
+                    "primary": "#091426",
+                    "on-background": "#171c1f",
+                    "surface-tint": "#545f73",
+                    "tertiary": "#330009",
+                    "surface-bright": "#f6fafe",
+                    "inverse-surface": "#2c3134",
+                    "secondary-fixed": "#6ffbbe",
+                    "surface-container-lowest": "#ffffff",
+                    "on-surface": "#171c1f",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed": "#d8e3fb",
+                    "on-tertiary-fixed-variant": "#92002a",
+                    "secondary-fixed-dim": "#4edea3",
+                    "surface-container-low": "#f0f4f8",
+                    "on-secondary-fixed": "#002113",
+                    "inverse-primary": "#bcc7de",
+                    "surface-container": "#eaeef2",
+                    "primary-fixed-dim": "#bcc7de",
+                    "on-primary": "#ffffff",
+                    "primary-container": "#1e293b",
+                    "surface-container-high": "#e4e9ed",
+                    "on-error": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "on-secondary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "on-primary-fixed-variant": "#3c475a",
+                    "surface-container-highest": "#dfe3e7",
+                    "secondary-container": "#6cf8bb",
+                    "outline": "#75777d",
+                    "on-tertiary-container": "#ff4e69",
+                    "on-secondary-fixed-variant": "#005236",
+                    "on-surface-variant": "#45474c",
+                    "surface": "#f6fafe",
+                    "inverse-on-surface": "#edf1f5",
+                    "on-tertiary-fixed": "#40000d",
+                    "on-secondary-container": "#00714d",
+                    "surface-dim": "#d6dade"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-md": "16px",
+                    "sidebar-width": "256px",
+                    "stack-sm": "8px",
+                    "container-padding": "24px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "label-caps": ["Inter"],
+                    "data-mono": ["JetBrains Mono"],
+                    "section-title": ["Inter"],
+                    "body": ["Inter"],
+                    "page-title": ["Inter"]
+            },
+            "fontSize": {
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "data-mono": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "section-title": ["18px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "body": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "page-title": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+        @media (max-width: 768px) { .sidebar-fixed { display: none; } }
+    </style>
+</head>
+<body class="bg-[#F8FAFC] text-on-background overflow-hidden">
+<!-- Shared SideNavBar Component -->
+<aside class="sidebar-fixed bg-white border-r border-outline-variant w-sidebar-width h-full fixed left-0 top-0 flex flex-col py-6 z-50">
+<div class="px-6 mb-8 flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary text-3xl">point_of_sale</span>
+<div>
+<h1 class="text-on-surface font-bold text-xl leading-tight">OmniPOS</h1>
+<p class="text-on-surface-variant text-[10px] uppercase tracking-wider font-medium">Retail Management</p>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<div class="text-[11px] font-bold text-on-surface-variant mb-3 px-2 mt-2 tracking-wider uppercase">Menu</div>
+<a class="flex items-center gap-3 bg-secondary/10 text-secondary rounded-xl px-3 py-2.5 transition-colors duration-200 ease-in-out cursor-pointer font-medium" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant px-3 py-2.5 rounded-xl hover:bg-surface-container-low transition-colors duration-200 ease-in-out cursor-pointer font-medium" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="text-sm">Products</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant px-3 py-2.5 rounded-xl hover:bg-surface-container-low transition-colors duration-200 ease-in-out cursor-pointer font-medium" href="#">
+<span class="material-symbols-outlined">category</span>
+<span class="text-sm">Categories</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant px-3 py-2.5 rounded-xl hover:bg-surface-container-low transition-colors duration-200 ease-in-out cursor-pointer font-medium" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="text-sm">Transactions</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant px-3 py-2.5 rounded-xl hover:bg-surface-container-low transition-colors duration-200 ease-in-out cursor-pointer font-medium" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-sm">Reports</span>
+</a>
+</nav>
+<div class="mt-auto px-4 space-y-1">
+<div class="text-[11px] font-bold text-on-surface-variant mb-3 px-2 tracking-wider uppercase">General</div>
+<a class="flex items-center gap-3 text-on-surface-variant px-3 py-2.5 rounded-xl hover:bg-surface-container-low transition-colors duration-200 cursor-pointer font-medium" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm">Settings</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant px-3 py-2.5 rounded-xl hover:bg-surface-container-low transition-colors duration-200 cursor-pointer font-medium" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="text-sm">Help</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant px-3 py-2.5 rounded-xl hover:bg-surface-container-low transition-colors duration-200 cursor-pointer font-medium mt-4" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="text-sm">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Shell -->
+<main class="ml-sidebar-width h-screen flex flex-col bg-[#F8FAFC]">
+<!-- Shared TopAppBar Component -->
+<header class="flex justify-between items-center w-full px-8 h-20 bg-white border-b border-outline-variant shrink-0 z-20">
+<div class="flex items-center flex-1 max-w-xl">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant text-xl">search</span>
+<input class="w-full bg-surface-container-low border border-transparent rounded-full pl-12 pr-12 py-2.5 focus:bg-white focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all text-sm" placeholder="Search products by name or SKU..." type="text"/>
+<div class="absolute right-3 top-1/2 -translate-y-1/2 flex gap-1">
+<span class="px-2 py-0.5 bg-white text-on-surface-variant rounded border border-outline-variant text-[10px] font-data-mono shadow-sm">⌘F</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-5">
+<div class="flex gap-3">
+<button class="w-10 h-10 rounded-full border border-outline-variant bg-white flex items-center justify-center text-on-surface-variant hover:text-primary hover:border-outline transition-colors"><span class="material-symbols-outlined text-[20px]">mail</span></button>
+<button class="w-10 h-10 rounded-full border border-outline-variant bg-white flex items-center justify-center text-on-surface-variant hover:text-primary hover:border-outline transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span></button>
+</div>
+<div class="flex items-center gap-3 pl-5 border-l border-outline-variant">
+<div class="text-right hidden sm:block">
+<p class="font-medium text-sm text-on-surface leading-none mb-1">Administrator</p>
+<p class="text-[11px] text-on-surface-variant">Terminal #01</p>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden border border-outline-variant shrink-0">
+<img class="w-full h-full object-cover" data-alt="Close-up portrait of a professional store administrator in a modern minimalist retail setting, wearing a clean white shirt. The background is softly blurred with hints of a tech-focused inventory system. High-key lighting, bright and airy atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_uph-qhDpB_fqYN9M_8lzj8kRGaz-5vguWPy5ovI31dV6JYkWMYeoz54Fr7DuZ25NiL3oZDRbrfimrQUvd1j_jSGoqRlZxBPNJPe1NfpHhK285DgjVW3hU9E3dHS_36sCgnw6wih0UE6QbBvxKwNocf94pJiers9PJYt3vlKEsfm4EoUicfI8im7mnHCxwo-bJWvzb_8solujmAKx7gvHD1RS3mn7zqRRy3T393XIUsHVKis_sZlpw_LzvZN0oFLDqOys89wYpC0"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Cashier Interface Layout -->
+<div class="flex flex-1 overflow-hidden">
+<!-- Left Column: Product Panel -->
+<section class="flex-1 flex flex-col overflow-hidden">
+<!-- Filters Bar -->
+<div class="px-8 pt-6 pb-2 flex gap-3 overflow-x-auto shrink-0">
+<button class="whitespace-nowrap px-5 py-2.5 rounded-full bg-secondary text-white font-medium text-sm shadow-sm transition-all">All Products</button>
+<button class="whitespace-nowrap px-5 py-2.5 rounded-full bg-white border border-outline-variant text-on-surface-variant font-medium text-sm hover:border-secondary hover:text-secondary transition-all shadow-sm">Electronics</button>
+<button class="whitespace-nowrap px-5 py-2.5 rounded-full bg-white border border-outline-variant text-on-surface-variant font-medium text-sm hover:border-secondary hover:text-secondary transition-all shadow-sm">Groceries</button>
+<button class="whitespace-nowrap px-5 py-2.5 rounded-full bg-white border border-outline-variant text-on-surface-variant font-medium text-sm hover:border-secondary hover:text-secondary transition-all shadow-sm">Lifestyle</button>
+<button class="whitespace-nowrap px-5 py-2.5 rounded-full bg-white border border-outline-variant text-on-surface-variant font-medium text-sm hover:border-secondary hover:text-secondary transition-all shadow-sm">Apparel</button>
+<button class="whitespace-nowrap px-5 py-2.5 rounded-full bg-white border border-outline-variant text-on-surface-variant font-medium text-sm hover:border-secondary hover:text-secondary transition-all shadow-sm">Hardware</button>
+</div>
+<!-- Product Grid -->
+<div class="flex-1 overflow-y-auto px-8 pb-8 pt-4">
+<div class="product-grid gap-6">
+<!-- Product Card Loop -->
+<script>
+                            const products = [
+                                { name: "Wireless Headphones", price: "Rp 1.250.000", stock: 12, cat: "Electronics" },
+                                { name: "Smart Watch Elite", price: "Rp 3.499.000", stock: 5, cat: "Electronics" },
+                                { name: "Organic Green Tea", price: "Rp 45.000", stock: 48, cat: "Groceries" },
+                                { name: "Canvas Tote Bag", price: "Rp 120.000", stock: 22, cat: "Lifestyle" },
+                                { name: "Mechanical Keyboard", price: "Rp 850.000", stock: 8, cat: "Electronics" },
+                                { name: "Leather Wallet", price: "Rp 350.000", stock: 15, cat: "Apparel" },
+                                { name: "Steel Water Bottle", price: "Rp 185.000", stock: 30, cat: "Lifestyle" },
+                                { name: "Premium Coffee Beans", price: "Rp 125.000", stock: 42, cat: "Groceries" },
+                                { name: "USB-C Hub Multi", price: "Rp 450.000", stock: 14, cat: "Electronics" },
+                                { name: "Denim Jacket", price: "Rp 599.000", stock: 6, cat: "Apparel" },
+                                { name: "Ergonomic Mouse", price: "Rp 420.000", stock: 11, cat: "Electronics" },
+                                { name: "Yoga Mat Pro", price: "Rp 380.000", stock: 19, cat: "Lifestyle" }
+                            ];
+
+                            products.forEach((p, i) => {
+                                document.write(`
+                                    <div class="bg-white rounded-[20px] p-4 flex flex-col hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-transparent hover:border-outline-variant transition-all duration-300 cursor-pointer group relative">
+                                        <div class="h-40 bg-surface-container-low rounded-2xl relative overflow-hidden mb-4">
+                                            <img src="placeholder" data-alt="High-quality professional product photography of ${p.name} on a clean, minimalist studio background. Soft cinematic lighting with subtle shadows, reflecting a premium retail aesthetic. The color palette is neutral with ${p.cat === 'Electronics' ? 'cool blue' : 'warm earth'} undertones." class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                            <div class="absolute top-3 left-3 bg-white/90 backdrop-blur px-3 py-1 rounded-full shadow-sm">
+                                                <p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">${p.cat}</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex flex-col flex-1 px-1">
+                                            <h3 class="font-semibold text-on-surface text-base line-clamp-1 mb-1">${p.name}</h3>
+                                            <p class="text-xs text-on-surface-variant mb-4">Stock: ${p.stock} units</p>
+                                            <div class="mt-auto flex justify-between items-center">
+                                                <p class="font-data-mono text-secondary font-bold text-lg">${p.price}</p>
+                                                <button class="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center text-on-surface-variant group-hover:bg-secondary group-hover:text-white group-hover:border-secondary transition-all shadow-sm group-hover:shadow-md">
+                                                    <span class="material-symbols-outlined text-[20px]">add</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `);
+                            });
+                        </script>
+</div>
+</div>
+</section>
+<!-- Right Column: Keranjang (Cart) -->
+<section class="w-[420px] flex flex-col bg-white border-l border-outline-variant shadow-[-8px_0_32px_rgba(0,0,0,0.03)] z-10">
+<div class="p-6 border-b border-outline-variant flex items-center justify-between bg-white shrink-0">
+<div>
+<h2 class="font-semibold text-xl text-on-surface mb-1">Current Order</h2>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<p class="text-on-surface-variant text-xs font-medium">Walk-in Guest</p>
+</div>
+</div>
+<button class="flex items-center gap-1.5 px-3 py-1.5 border border-outline-variant rounded-full text-xs font-medium text-on-surface-variant hover:text-error hover:border-error transition-colors">
+<span class="material-symbols-outlined text-[14px]">delete</span>
+                    Clear
+                </button>
+</div>
+<!-- Cart Items List -->
+<div class="flex-1 overflow-y-auto p-6 space-y-3 bg-[#F8FAFC]">
+<!-- Item 1 -->
+<div class="flex items-center gap-4 bg-white p-3.5 rounded-[20px] border border-outline-variant shadow-sm group hover:border-secondary/30 transition-colors">
+<div class="w-14 h-14 rounded-2xl bg-surface-container-low overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="Macro detail of wireless headphones texture, soft leather padding, premium slate gray finish, studio lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvOueE-ts9U2efdv0ZHsHFU6qyYBqU2whTZ5cEqm_l0ClbJ1PB-KNdm69IweNx3WR2fkh1gaBKYAhfmK5xkztG18TdSCpPQ-Jlc37mjMACil1Rt1XN3AkBBq-Dc6UAPDng3kxA5-h9Cp55ChzXRtDPZ-PrVUI7I52MxbNAjnuKL-35v5BqVE6-lnpvyFfQdUelODg9sok1za5sNHqi_iS-4fTojWYiw_LzJS8EKA5d-cRsC1epkhSwb78rTJc0QgG-drNs76F_cDo"/>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="font-semibold text-on-surface text-sm truncate mb-0.5">Wireless Headphones</h4>
+<p class="text-xs text-on-surface-variant font-data-mono">Rp 1.250.000</p>
+</div>
+<div class="flex flex-col items-end gap-2 shrink-0">
+<button class="text-outline hover:text-error transition-colors"><span class="material-symbols-outlined text-[18px]">close</span></button>
+<div class="flex items-center border border-outline-variant rounded-full h-8 bg-white overflow-hidden shadow-sm">
+<button class="w-8 h-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low hover:text-secondary transition-colors"><span class="material-symbols-outlined text-[16px]">remove</span></button>
+<span class="font-data-mono text-sm w-6 text-center font-medium border-x border-outline-variant">1</span>
+<button class="w-8 h-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low hover:text-secondary transition-colors"><span class="material-symbols-outlined text-[16px]">add</span></button>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex items-center gap-4 bg-white p-3.5 rounded-[20px] border border-outline-variant shadow-sm group hover:border-secondary/30 transition-colors">
+<div class="w-14 h-14 rounded-2xl bg-surface-container-low overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="Detail of a smart watch elite screen showing health metrics, vibrant emerald green display accents, minimalist design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAS0ZXdHc7aCSAUxmEu9A1uZQIAiJkSUj_z7UllhPtMdQmRRWqVRM-XQX4hinacCSsyQGjVhh7uy-Mz5jKnYbhJjNOxErSsFD4Z3R9MWAj8dn4FTym3rEvdW7QwNx2Hej4U4Xt6AbT8Ua6jxzWEJH95Yg74vA8pLillobbC7tKW5q2XlIOvHI-KSTWkjDhLIBqvzU0MYMlEBxDK_XMYrQmgIhkCx7soh1BSfB-2hH1RLtv6YEQ81YaVXBEnWnu7-zspOnCPIjH3VUg"/>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="font-semibold text-on-surface text-sm truncate mb-0.5">Smart Watch Elite</h4>
+<p class="text-xs text-on-surface-variant font-data-mono">Rp 3.499.000</p>
+</div>
+<div class="flex flex-col items-end gap-2 shrink-0">
+<button class="text-outline hover:text-error transition-colors"><span class="material-symbols-outlined text-[18px]">close</span></button>
+<div class="flex items-center border border-outline-variant rounded-full h-8 bg-white overflow-hidden shadow-sm">
+<button class="w-8 h-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low hover:text-secondary transition-colors"><span class="material-symbols-outlined text-[16px]">remove</span></button>
+<span class="font-data-mono text-sm w-6 text-center font-medium border-x border-outline-variant">2</span>
+<button class="w-8 h-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low hover:text-secondary transition-colors"><span class="material-symbols-outlined text-[16px]">add</span></button>
+</div>
+</div>
+</div>
+</div>
+<!-- Summary Panel -->
+<div class="p-6 bg-white border-t border-outline-variant rounded-t-[32px] shadow-[0_-8px_32px_rgba(0,0,0,0.04)] relative z-20 shrink-0">
+<div class="space-y-3 mb-6">
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant font-medium">Subtotal</span>
+<span class="font-data-mono font-medium text-on-surface">Rp 8.248.000</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant font-medium">Tax (11%)</span>
+<span class="font-data-mono font-medium text-on-surface">Rp 907.280</span>
+</div>
+<div class="flex justify-between items-center pt-4 border-t border-outline-variant border-dashed mt-2">
+<span class="font-semibold text-lg text-on-surface">Total</span>
+<span class="font-data-mono font-bold text-secondary text-2xl">Rp 9.155.280</span>
+</div>
+</div>
+<div class="space-y-4">
+<div class="relative">
+<label class="absolute -top-2.5 left-4 px-1.5 bg-white text-[10px] font-bold text-secondary uppercase tracking-wider z-10">Uang Bayar</label>
+<input class="w-full bg-white border-2 border-outline-variant rounded-[16px] px-4 py-3.5 text-right font-data-mono text-xl font-medium focus:ring-2 focus:ring-secondary/20 focus:border-secondary transition-all shadow-sm" type="text" value="10.000.000"/>
+</div>
+<div class="flex items-center justify-between bg-secondary/5 px-5 py-4 rounded-[16px] border border-secondary/20">
+<span class="text-secondary text-sm font-semibold tracking-wide">Kembalian</span>
+<span class="font-data-mono font-bold text-secondary text-xl">Rp 844.720</span>
+</div>
+<button class="w-full bg-secondary hover:bg-[#005236] text-white py-4 rounded-[16px] font-semibold text-lg shadow-lg shadow-secondary/30 flex items-center justify-center gap-2 transition-all active:scale-[0.98]">
+                    Proses Bayar
+                    <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Micro-interaction Scripts -->
+<script>
+        // Simple visual feedback for product cards
+        document.querySelectorAll('.product-grid > div').forEach(card => {
+            card.addEventListener('click', () => {
+                card.classList.add('scale-[0.98]');
+                setTimeout(() => card.classList.remove('scale-[0.98]'), 150);
+            });
+        });
+
+        // Tab selection for categories
+        const catButtons = document.querySelectorAll('.whitespace-nowrap');
+        catButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                catButtons.forEach(b => {
+                    b.classList.remove('bg-secondary', 'text-white', 'border-transparent');
+                    b.classList.add('bg-white', 'border-outline-variant', 'text-on-surface-variant');
+                });
+                btn.classList.remove('bg-white', 'border-outline-variant', 'text-on-surface-variant');
+                btn.classList.add('bg-secondary', 'text-white', 'border-transparent');
+            });
+        });
+    </script>
+</body></html>

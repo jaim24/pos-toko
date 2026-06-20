@@ -1,0 +1,267 @@
+<!DOCTYPE html><html class="light" lang="id"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Masuk - Stitch POS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "surface-container-high": "#e4e9ed",
+                "primary-container": "#1e293b",
+                "on-error": "#ffffff",
+                "error-container": "#ffdad6",
+                "on-primary": "#ffffff",
+                "on-primary-fixed-variant": "#3c475a",
+                "on-secondary": "#ffffff",
+                "on-error-container": "#93000a",
+                "on-secondary-fixed": "#002113",
+                "surface-container-low": "#f0f4f8",
+                "inverse-primary": "#bcc7de",
+                "surface-container": "#eaeef2",
+                "primary-fixed-dim": "#bcc7de",
+                "on-tertiary-fixed": "#40000d",
+                "inverse-on-surface": "#edf1f5",
+                "surface": "#f6fafe",
+                "on-secondary-container": "#00714d",
+                "surface-dim": "#d6dade",
+                "surface-container-highest": "#dfe3e7",
+                "secondary-container": "#6cf8bb",
+                "outline": "#75777d",
+                "on-tertiary-container": "#ff4e69",
+                "on-secondary-fixed-variant": "#005236",
+                "on-surface-variant": "#45474c",
+                "tertiary-container": "#590016",
+                "on-primary-container": "#8590a6",
+                "on-primary-fixed": "#111c2d",
+                "background": "#f6fafe",
+                "error": "#ba1a1a",
+                "secondary": "#006c49",
+                "primary": "#091426",
+                "on-background": "#171c1f",
+                "surface-variant": "#dfe3e7",
+                "tertiary-fixed-dim": "#ffb2b7",
+                "tertiary-fixed": "#ffdadb",
+                "outline-variant": "#c5c6cd",
+                "primary-fixed": "#d8e3fb",
+                "on-tertiary-fixed-variant": "#92002a",
+                "secondary-fixed-dim": "#4edea3",
+                "surface-tint": "#545f73",
+                "tertiary": "#330009",
+                "surface-bright": "#f6fafe",
+                "surface-container-lowest": "#ffffff",
+                "secondary-fixed": "#6ffbbe",
+                "inverse-surface": "#2c3134",
+                "on-tertiary": "#ffffff",
+                "on-surface": "#171c1f"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "stack-sm": "8px",
+                "gutter": "16px",
+                "container-padding": "24px",
+                "stack-md": "16px",
+                "sidebar-width": "256px"
+        },
+        "fontFamily": {
+                "page-title": [
+                        "Inter"
+                ],
+                "body": [
+                        "Inter"
+                ],
+                "data-mono": [
+                        "JetBrains Mono"
+                ],
+                "label-caps": [
+                        "Inter"
+                ],
+                "section-title": [
+                        "Inter"
+                ]
+        },
+        "fontSize": {
+                "page-title": [
+                        "24px",
+                        {
+                                "lineHeight": "32px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "body": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "data-mono": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "label-caps": [
+                        "12px",
+                        {
+                                "lineHeight": "16px",
+                                "letterSpacing": "0.05em",
+                                "fontWeight": "500"
+                        }
+                ],
+                "section-title": [
+                        "18px",
+                        {
+                                "lineHeight": "28px",
+                                "fontWeight": "500"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f6fafe;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex bg-surface-container-low p-4 sm:p-8">
+<div class="flex w-full max-w-7xl mx-auto bg-surface-container-lowest rounded-3xl overflow-hidden shadow-2xl border border-outline-variant/20">
+<!-- Left Illustration Panel -->
+<div class="hidden lg:block lg:w-1/2 relative bg-surface-container">
+<img alt="Retail POS Environment" class="absolute inset-0 w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuACAWpMd-Gm8M4qV5uhPyVUfA_j5zlwQYGF9-FExnSftjt6OcmZ4dO-irbOi4Abtpqp5GSfaVtT_Cp8wDwgzmuieM2k3MFNEW96S-pr9nTo1X9AVyXIJQaUaYHk7W2Xjt2Pa86dnY7hXDJmYGIuwXGXApS8HCg0zz_il0BfuviBvFiwbojUFODTe6B609_oHjrr0a4jqKR24UPUvJ0v4-hm0LFcfw9L-VwCF-G4O7GQQLq0239NCXUYFWM7IgOF0DM97Bu2WdnhnAI">
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"></div>
+<div class="absolute bottom-12 left-12 right-12">
+<h2 class="text-3xl font-bold text-on-primary mb-4">Elevate Your Retail Experience</h2>
+<p class="text-on-primary/80 text-lg">Stitch POS provides the seamless tools you need to manage your business effectively and beautifully.</p>
+</div>
+</div>
+<!-- Right Login Panel -->
+<div class="w-full lg:w-1/2 flex flex-col items-center justify-center p-8 sm:p-12 md:p-16 relative">
+<main class="w-full max-w-md">
+<!-- Brand Header -->
+<div class="flex items-center gap-3 mb-10 justify-center">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary text-2xl" data-icon="Architecture">architecture</span>
+</div>
+<h1 class="font-page-title text-page-title text-primary tracking-tight">Stitch POS</h1>
+</div>
+<!-- Main Login Form -->
+<div class="bg-surface-container-lowest">
+<header class="mb-8 text-center">
+<h2 class="text-3xl font-bold text-primary mb-2">Selamat Datang Kembali</h2>
+<p class="font-body text-body text-on-surface-variant">Silakan masuk ke akun operator Anda.</p>
+</header>
+<form action="#" class="space-y-6" id="loginForm">
+<!-- Email Field -->
+<div class="space-y-2">
+<label class="font-label-caps text-label-caps text-on-surface-variant block" for="email">ALAMAT EMAIL</label>
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline text-lg group-focus-within:text-secondary transition-colors" data-icon="mail">mail</span>
+</div>
+<input class="block w-full pl-10 pr-4 py-3 bg-white border border-outline-variant rounded-lg font-body text-body text-on-surface placeholder:text-outline-variant focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition-all duration-200" id="email" name="email" placeholder="nama@perusahaan.com" required="" type="email">
+</div>
+</div>
+<!-- Password Field -->
+<div class="space-y-2">
+<div class="flex justify-between items-center">
+<label class="font-label-caps text-label-caps text-on-surface-variant block" for="password">KATA SANDI</label>
+</div>
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline text-lg group-focus-within:text-secondary transition-colors" data-icon="lock">lock</span>
+</div>
+<input class="block w-full pl-10 pr-12 py-3 bg-white border border-outline-variant rounded-lg font-body text-body text-on-surface placeholder:text-outline-variant focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition-all duration-200" id="password" name="password" placeholder="••••••••" required="" type="password">
+<button class="absolute inset-y-0 right-0 pr-3 flex items-center text-outline hover:text-on-surface-variant transition-colors" id="togglePassword" type="button">
+<span class="material-symbols-outlined text-lg" data-icon="visibility">visibility</span>
+</button>
+</div>
+</div>
+<!-- Remember & Forgot -->
+<div class="flex items-center justify-between">
+<label class="flex items-center cursor-pointer group">
+<input class="w-4 h-4 rounded border-outline-variant text-secondary focus:ring-secondary cursor-pointer" type="checkbox">
+<span class="ml-2 font-body text-body text-on-surface-variant group-hover:text-on-surface transition-colors">Ingat saya</span>
+</label>
+<a class="font-body text-body text-secondary hover:text-secondary/80 font-medium transition-colors" href="#">Lupa password?</a>
+</div>
+<!-- Submit Button -->
+<button class="w-full py-3.5 bg-secondary text-white font-section-title text-section-title font-bold rounded-lg hover:bg-secondary/90 active:scale-[0.98] transition-all duration-200 shadow-md shadow-secondary/20 flex items-center justify-center gap-2 mt-4" type="submit">
+                        Masuk
+                        <span class="material-symbols-outlined text-xl" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</form>
+<footer class="mt-10 pt-6 border-t border-outline-variant/30 text-center">
+<p class="font-body text-body text-on-surface-variant">
+                        Belum punya akun? <a class="text-secondary font-semibold hover:underline" href="#">Hubungi Admin</a>
+</p>
+</footer>
+</div>
+<!-- Security Footer Badge -->
+<div class="mt-8 flex items-center justify-center gap-2 text-on-primary-container opacity-60">
+<span class="material-symbols-outlined text-sm" data-icon="encrypted">encrypted</span>
+<span class="font-label-caps text-[10px] tracking-widest">SECURE AES-256 ENCRYPTED ENVIRONMENT</span>
+</div>
+</main>
+</div>
+</div>
+<!-- UI Logic Script -->
+<script>
+        // Toggle Password Visibility
+        const togglePassword = document.querySelector('#togglePassword');
+        const passwordInput = document.querySelector('#password');
+        const passwordIcon = togglePassword.querySelector('.material-symbols-outlined');
+
+        togglePassword.addEventListener('click', () => {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            passwordIcon.textContent = type === 'password' ? 'visibility' : 'visibility_off';
+            passwordIcon.setAttribute('data-icon', type === 'password' ? 'visibility' : 'visibility_off');
+        });
+
+        // Form Submit Interaction
+        const loginForm = document.querySelector('#loginForm');
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = loginForm.querySelector('button[type="submit"]');
+            const originalContent = btn.innerHTML;
+            
+            btn.disabled = true;
+            btn.innerHTML = `<span class="material-symbols-outlined animate-spin" data-icon="progress_activity">progress_activity</span> Memverifikasi...`;
+            
+            // Simulate API Call
+            setTimeout(() => {
+                btn.innerHTML = `<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span> Berhasil`;
+                btn.classList.remove('bg-secondary');
+                btn.classList.add('bg-primary');
+                
+                setTimeout(() => {
+                    alert('Login berhasil! Mengalihkan ke Dashboard...');
+                    btn.innerHTML = originalContent;
+                    btn.disabled = false;
+                    btn.classList.remove('bg-primary');
+                    btn.classList.add('bg-secondary');
+                }, 1000);
+            }, 1500);
+        });
+    </script>
+
+
+</body></html>

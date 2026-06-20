@@ -1,0 +1,445 @@
+<!DOCTYPE html><html class="light" lang="id"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Stitch POS - Sistem POS Terbaik untuk Bisnis Kuliner &amp; Retail</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Inter & JetBrains Mono -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed": "#ffdadb",
+                    "surface-container": "#eaeef2",
+                    "secondary-fixed-dim": "#4edea3",
+                    "on-surface-variant": "#45474c",
+                    "surface-dim": "#d6dade",
+                    "on-secondary-container": "#00714d",
+                    "outline-variant": "#c5c6cd",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#92002a",
+                    "inverse-primary": "#bcc7de",
+                    "surface-variant": "#dfe3e7",
+                    "on-primary-fixed-variant": "#3c475a",
+                    "surface-container-low": "#f0f4f8",
+                    "tertiary-fixed-dim": "#ffb2b7",
+                    "on-background": "#171c1f",
+                    "secondary-container": "#6cf8bb",
+                    "secondary-fixed": "#6ffbbe",
+                    "on-secondary-fixed-variant": "#005236",
+                    "surface": "#f6fafe",
+                    "on-surface": "#171c1f",
+                    "on-error-container": "#93000a",
+                    "primary-fixed": "#d8e3fb",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-high": "#e4e9ed",
+                    "tertiary-container": "#590016",
+                    "on-error": "#ffffff",
+                    "on-tertiary-fixed": "#40000d",
+                    "outline": "#75777d",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-container": "#ff4e69",
+                    "error": "#ba1a1a",
+                    "secondary": "#10b981", /* Emerald 500 equivalent */
+                    "on-primary-fixed": "#111c2d",
+                    "on-primary-container": "#8590a6",
+                    "on-tertiary": "#ffffff",
+                    "surface-tint": "#545f73",
+                    "primary": "#1e293b", /* Slate 800 equivalent */
+                    "background": "#f6fafe",
+                    "surface-container-highest": "#dfe3e7",
+                    "primary-fixed-dim": "#bcc7de",
+                    "inverse-surface": "#2c3134",
+                    "primary-container": "#0f172a",
+                    "surface-bright": "#f6fafe",
+                    "tertiary": "#330009",
+                    "on-secondary-fixed": "#002113",
+                    "inverse-on-surface": "#edf1f5"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "2xl": "1rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-sm": "8px",
+                    "stack-md": "16px",
+                    "sidebar-width": "256px",
+                    "gutter": "16px",
+                    "container-padding": "24px"
+            },
+            "fontFamily": {
+                    "label-caps": ["Inter"],
+                    "data-mono": ["JetBrains Mono"],
+                    "section-title": ["Inter"],
+                    "page-title": ["Inter"],
+                    "body": ["Inter"]
+            },
+            "fontSize": {
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "data-mono": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "section-title": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "page-title": ["48px", {"lineHeight": "1.1", "fontWeight": "800"}],
+                    "body": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 1.5rem;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #f6fafe 0%, #e0f2fe 100%);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<header class="bg-surface/90 backdrop-blur-md sticky top-0 z-50 border-b border-outline-variant shadow-sm">
+<nav class="flex justify-between items-center w-full px-container-padding py-4 max-w-7xl mx-auto">
+<div class="flex items-center gap-2">
+<span class="text-page-title font-page-title font-black text-secondary leading-none">Stitch POS</span>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-secondary border-b-2 border-secondary pb-1 text-label-caps font-label-caps" href="#">Features</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors duration-200 text-label-caps font-label-caps" href="#">Solutions</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors duration-200 text-label-caps font-label-caps" href="#">Pricing</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors duration-200 text-label-caps font-label-caps" href="#">Contact</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="px-6 py-2 bg-secondary text-on-secondary rounded-full font-label-caps text-label-caps hover:bg-secondary/90 transition-all active:scale-95">
+                    Get Started
+                </button>
+</div>
+</nav>
+</header>
+<!-- Hero Section -->
+<section class="hero-gradient relative py-12 md:py-24 overflow-hidden">
+<div class="max-w-7xl mx-auto px-container-padding flex flex-col md:flex-row items-center gap-12">
+<div class="flex-1 space-y-6 z-10">
+<div class="inline-block px-4 py-1.5 bg-secondary/10 text-secondary rounded-full font-label-caps text-label-caps uppercase tracking-wider">
+                    Precision for Retail &amp; Catering
+                </div>
+<h1 class="text-page-title font-page-title text-primary leading-tight">
+                    Sistem POS Terbaik untuk <span class="text-secondary">Bisnis Kuliner &amp; Retail</span>
+</h1>
+<p class="text-body font-body text-on-surface-variant max-w-xl">
+                    Optimalkan operasional bisnis Anda dengan kecepatan dan akurasi tinggi. Kelola transaksi, stok, hingga laporan keuangan dalam satu platform yang intuitif dan reliabel.
+                </p>
+<div class="flex flex-wrap gap-4 pt-4">
+<button class="px-8 py-4 bg-secondary text-on-secondary rounded-xl font-bold hover:shadow-lg hover:shadow-secondary/20 transition-all flex items-center gap-2">
+                        Mulai Sekarang
+                        <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<button class="px-8 py-4 bg-white border border-outline-variant text-primary rounded-xl font-bold hover:bg-surface-container-low transition-all">
+                        Lihat Demo
+                    </button>
+</div>
+<div class="flex items-center gap-4 pt-6 text-on-surface-variant">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full bg-slate-200 border-2 border-white"></div>
+<div class="w-8 h-8 rounded-full bg-slate-300 border-2 border-white"></div>
+<div class="w-8 h-8 rounded-full bg-slate-400 border-2 border-white"></div>
+</div>
+<span class="text-label-caps font-label-caps">Dipercaya oleh 2,500+ Bisnis di Indonesia</span>
+</div>
+</div>
+<div class="flex-1 relative">
+<div class="relative w-full max-w-lg mx-auto">
+<!-- Modern Image Shape with Shadow -->
+<div class="rounded-[2rem] overflow-hidden shadow-2xl rotate-3 transform hover:rotate-0 transition-transform duration-500 border-8 border-white">
+<img class="w-full h-[500px] object-cover" data-alt="A professional high-angle culinary shot of a gourmet dish being prepared in a clean, modern commercial kitchen. The lighting is soft and natural, emphasizing the textures of fresh herbs and vibrant vegetables. The scene conveys a sense of high-end catering and operational precision, consistent with a premium POS brand aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBo8f9k5L_-HIy7w1rIAHohiCAucceZY9Af1AJIKyV5KtBIMuYCcfbRPLmOd9r3ZD9EsQ2673EkjpRvfY81gkQGyJTDgqufIFO35_sxqXhgmV-JQDUZeKW5nyg0JXM728u5QhFpGmGjSwk5ol-2kD0-OggdINRUXR5WsUpmJv-MyQlkTApY5pK79mOMe2-_fci-KxA2kTwcsixp3jNAyrwu0Jgh9Rj5qSTBF4DGgyt8CKGRWhB3EqR3vdsL6eg7pn7UczVrR5oVyqc">
+</div>
+<!-- Abstract Accents -->
+<div class="absolute -top-12 -right-12 w-48 h-48 bg-secondary/20 rounded-full blur-3xl -z-10"></div>
+<div class="absolute -bottom-8 -left-8 w-64 h-64 bg-primary/10 rounded-full blur-3xl -z-10"></div>
+<!-- Floating Stat Card -->
+<div class="absolute bottom-10 -left-12 glass-card p-4 rounded-2xl shadow-xl hidden lg:block animate-bounce-slow">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-secondary/20 text-secondary rounded-lg">
+<span class="material-symbols-outlined">trending_up</span>
+</div>
+<div>
+<p class="text-[10px] text-on-surface-variant font-label-caps uppercase">Efisiensi Transaksi</p>
+<p class="text-lg font-bold text-primary">+45% Lebih Cepat</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Features Grid Section -->
+<section class="py-24 bg-white">
+<div class="max-w-7xl mx-auto px-container-padding">
+<div class="text-center max-w-2xl mx-auto mb-16 space-y-4">
+<h2 class="text-page-title font-page-title text-primary">Fitur Unggulan Untuk Performa Maksimal</h2>
+<p class="text-body font-body text-on-surface-variant">
+                    Dirancang untuk memudahkan setiap aspek manajemen bisnis kuliner Anda, dari operasional dapur hingga meja kasir.
+                </p>
+</div>
+<div class="bento-grid">
+<!-- Feature 1 -->
+<div class="p-8 rounded-3xl bg-surface-container-low border border-slate-100 hover:border-secondary/30 transition-all hover:shadow-md group">
+<div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-secondary mb-6 shadow-sm group-hover:bg-secondary group-hover:text-white transition-all">
+<span class="material-symbols-outlined">inventory_2</span>
+</div>
+<h3 class="text-section-title font-section-title text-primary mb-2">Manajemen Stok Real-time</h3>
+<p class="text-body font-body text-on-surface-variant text-sm">Pantau persediaan bahan baku secara otomatis setiap ada transaksi terjual.</p>
+</div>
+<!-- Feature 2 -->
+<div class="p-8 rounded-3xl bg-surface-container-low border border-slate-100 hover:border-secondary/30 transition-all hover:shadow-md group">
+<div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-secondary mb-6 shadow-sm group-hover:bg-secondary group-hover:text-white transition-all">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+<h3 class="text-section-title font-section-title text-primary mb-2">Laporan Penjualan Otomatis</h3>
+<p class="text-body font-body text-on-surface-variant text-sm">Dapatkan insight mendalam tentang menu favorit dan tren penjualan harian Anda.</p>
+</div>
+<!-- Feature 3 -->
+<div class="p-8 rounded-3xl bg-surface-container-low border border-slate-100 hover:border-secondary/30 transition-all hover:shadow-md group">
+<div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-secondary mb-6 shadow-sm group-hover:bg-secondary group-hover:text-white transition-all">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<h3 class="text-section-title font-section-title text-primary mb-2">Integrasi Pembayaran Digital</h3>
+<p class="text-body font-body text-on-surface-variant text-sm">Terima pembayaran QRIS, e-wallet, dan kartu debit dengan proses yang sangat cepat.</p>
+</div>
+<!-- Feature 4 -->
+<div class="p-8 rounded-3xl bg-surface-container-low border border-slate-100 hover:border-secondary/30 transition-all hover:shadow-md group">
+<div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-secondary mb-6 shadow-sm group-hover:bg-secondary group-hover:text-white transition-all">
+<span class="material-symbols-outlined">storefront</span>
+</div>
+<h3 class="text-section-title font-section-title text-primary mb-2">Dukungan Multi-outlet</h3>
+<p class="text-body font-body text-on-surface-variant text-sm">Kelola puluhan cabang dalam satu dashboard terpusat tanpa ribet.</p>
+</div>
+<!-- Feature 5 -->
+<div class="p-8 rounded-3xl bg-surface-container-low border border-slate-100 hover:border-secondary/30 transition-all hover:shadow-md group">
+<div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-secondary mb-6 shadow-sm group-hover:bg-secondary group-hover:text-white transition-all">
+<span class="material-symbols-outlined">groups</span>
+</div>
+<h3 class="text-section-title font-section-title text-primary mb-2">Manajemen Karyawan</h3>
+<p class="text-body font-body text-on-surface-variant text-sm">Atur shift, performa, dan otorisasi akses kasir dengan kontrol penuh di tangan Anda.</p>
+</div>
+<!-- Feature 6 -->
+<div class="p-8 rounded-3xl bg-surface-container-low border border-slate-100 hover:border-secondary/30 transition-all hover:shadow-md group">
+<div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-secondary mb-6 shadow-sm group-hover:bg-secondary group-hover:text-white transition-all">
+<span class="material-symbols-outlined">loyalty</span>
+</div>
+<h3 class="text-section-title font-section-title text-primary mb-2">Program Loyalitas</h3>
+<p class="text-body font-body text-on-surface-variant text-sm">Bangun database pelanggan dan buat promo diskon khusus untuk member setia.</p>
+</div>
+<!-- Feature 7 -->
+<div class="p-8 rounded-3xl bg-surface-container-low border border-slate-100 hover:border-secondary/30 transition-all hover:shadow-md group">
+<div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-secondary mb-6 shadow-sm group-hover:bg-secondary group-hover:text-white transition-all">
+<span class="material-symbols-outlined">kitchen</span>
+</div>
+<h3 class="text-section-title font-section-title text-primary mb-2">Kitchen Display System</h3>
+<p class="text-body font-body text-on-surface-variant text-sm">Kirim pesanan dari meja langsung ke layar dapur tanpa perlu kertas printer.</p>
+</div>
+<!-- Feature 8 -->
+<div class="p-8 rounded-3xl bg-surface-container-low border border-slate-100 hover:border-secondary/30 transition-all hover:shadow-md group">
+<div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-secondary mb-6 shadow-sm group-hover:bg-secondary group-hover:text-white transition-all">
+<span class="material-symbols-outlined">cloud_sync</span>
+</div>
+<h3 class="text-section-title font-section-title text-primary mb-2">Akses Cloud Anywhere</h3>
+<p class="text-body font-body text-on-surface-variant text-sm">Pantau bisnis Anda kapan saja dan di mana saja melalui smartphone atau tablet.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonials Section -->
+<section class="py-24 bg-surface-container-lowest">
+<div class="max-w-7xl mx-auto px-container-padding">
+<div class="text-center mb-16">
+<h2 class="text-page-title font-page-title text-primary">Apa Kata Mereka</h2>
+<p class="text-body font-body text-on-surface-variant mt-4">Kesuksesan bisnis mereka berawal dari sistem yang tepat.</p>
+</div>
+<div class="grid md:grid-cols-3 gap-8">
+<!-- Testimonial 1 -->
+<div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 flex flex-col h-full">
+<div class="mb-6">
+<img class="w-16 h-16 rounded-full object-cover border-2 border-secondary/20" data-alt="A portrait of a smiling young restaurant owner standing inside her brightly lit, modern cafe. She has a warm, confident expression. The background shows blurred elements of a contemporary coffee shop with wood accents and green plants, creating a welcoming and professional atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-2mj25Iad-Fh-6IZBfvVmDIJJGQwVUagaMmPicAgwardHOUAnniURubtb2cDawj32wVVWhdbqvLuyuyUWFvThfZqLhMOsU56SbjKhcACG97QeA9-VaQHUeif3O-j4g5EBIcTWgGxFjK6Ljf1N4l_jBgdUdXg5u1RpF-8_s6vPnhINtSWCke_6e_AF76nIHg01g4iUgVuhRA_QCeLWDSD-u0vVc7c1AGs9N4y80aCX4lb6Qs8cWDUAYst23sqKCMesLU7wSW-99Hg">
+</div>
+<p class="italic text-on-surface-variant text-body font-body flex-1 mb-6">
+                        "Stitch POS benar-benar mengubah cara kami mengelola stok. Dulu sering sekali bahan habis tanpa terdeteksi, sekarang semuanya terpantau rapi."
+                    </p>
+<div>
+<p class="font-bold text-primary">Maya Sartika</p>
+<p class="text-sm text-secondary font-label-caps uppercase">Owner, Green Bites Cafe</p>
+</div>
+</div>
+<!-- Testimonial 2 -->
+<div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 flex flex-col h-full">
+<div class="mb-6">
+<img class="w-16 h-16 rounded-full object-cover border-2 border-secondary/20" data-alt="A professional middle-aged man who owns a retail business, dressed in business-casual attire, smiling at the camera. He is in a clean, organized boutique setting with soft, warm lighting. The overall mood is one of reliability, success, and trust, reflecting a satisfied business partner." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDl8RINukzTtuH-AUxEyVpP7LvDmSP7_4JixWZuitpEVf8nNMBeavBKXxziZPQ09M2RYFJI3jdHnfTqi_Aow6eNMgdT2WJ3UeQeSKi12FTOIWdRifIXvBxCx9An-dKFLO4Rk3vsjxxS0y3UJzMK_7Rtbgnxivk13CZLnpHfFY6w9ALPwLth2psiB4Fn-_dpz6ZOg5VMhl5pdHzfNpgVfVYIjAJuSh-6cskWHoHQril38H5fxHjsvBobb9nMDyT5sKuFHltgmtYXQss">
+</div>
+<p class="italic text-on-surface-variant text-body font-body flex-1 mb-6">
+                        "Proses checkout yang cepat sangat membantu saat jam sibuk. Customer tidak perlu mengantri lama, dan pembayaran digitalnya sangat lancar."
+                    </p>
+<div>
+<p class="font-bold text-primary">Budi Santoso</p>
+<p class="text-sm text-secondary font-label-caps uppercase">Founder, Urban Retail Group</p>
+</div>
+</div>
+<!-- Testimonial 3 -->
+<div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 flex flex-col h-full">
+<div class="mb-6">
+<img class="w-16 h-16 rounded-full object-cover border-2 border-secondary/20" data-alt="A young entrepreneur with a trendy aesthetic, wearing an apron, standing behind a polished wooden counter of a catering business. He looks energetic and happy. The setting is a professional kitchen or serving area with high-end equipment in the background. The lighting is crisp and modern." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC16lleWbG0maArxz7G3OZst3NpM2pau8Ye5kbnU4ajjL9dZPRanJtojuBDfwLVnFDkcjkN_I-89ljgzcesThkYt8Xjy80ttBX5uJa6tBN3z9u5T6ofZQ85ruuMMIOcbwor3E0wL4kdNyp8LlhVz1aLay2x_G8wJTK9ULp6rOhv1PWaqBi8V8SJbtec-Eh7M1gKWrzTVqSEG0sPFky9ypWYauOpIB-pxEqdSaTHxjc6kal29TkHziSbr8-Xc2PUUivCdWi4I5z_yJI">
+</div>
+<p class="italic text-on-surface-variant text-body font-body flex-1 mb-6">
+                        "Fitur multi-outletnya juaranya. Saya bisa cek performa 5 cabang saya sekaligus dari rumah tanpa harus keliling satu-satu."
+                    </p>
+<div>
+<p class="font-bold text-primary">Rizky Ramadhan</p>
+<p class="text-sm text-secondary font-label-caps uppercase">CEO, Delice Catering</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Split Benefits Section -->
+<section class="py-24 bg-white overflow-hidden">
+<div class="max-w-7xl mx-auto px-container-padding grid md:grid-cols-2 gap-16 items-center">
+<div class="relative group">
+<div class="absolute -inset-4 bg-secondary/10 rounded-[3rem] -rotate-3 transition-transform group-hover:rotate-0"></div>
+<img class="relative w-full rounded-[2.5rem] shadow-xl z-10" data-alt="A delicious, close-up food photography shot of a stacked artisanal sandwich with fresh tomato, lettuce, and melted cheese on crusty bread, presented on a wooden board. The lighting is warm and appetizing, showcasing vibrant colors and appetizing textures. The style is clean, editorial, and sophisticated, emphasizing culinary excellence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBp2mAVMc-P_2g2VJP3zmxIuRENItr10E5hYjUdjSec7EwA3MawGzXu9ee1B-1XuQqPiZPoptl1zda9sliM6hGVBoOHafrOPAqxJSst480Es1QeXz_wwLi1vIxugcne7r2WcXbCz98XYwgzei2sg0DuVms9g7d2__dpBXJ7PF-1umIzr6jscv1z33o8e1Ny46f_INhmG709RhwtdMJgru10QDWvCZv_se8fM-lGpT6cO9LaABrx6jCwK_2g68AJ27OhFLg_osSu1p4">
+</div>
+<div class="space-y-8">
+<h2 class="text-page-title font-page-title text-primary leading-tight">Biarkan Kami Menangani Kerumitan Operasional</h2>
+<div class="space-y-6">
+<div class="flex gap-4">
+<div class="mt-1 w-8 h-8 bg-secondary/10 text-secondary flex items-center justify-center rounded-full flex-shrink-0">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div>
+<h4 class="font-bold text-primary text-lg">Fokus Pada Pelayanan</h4>
+<p class="text-on-surface-variant text-sm mt-1">Stitch POS menangani semua pencatatan, sehingga Anda dan tim bisa fokus memberikan pelayanan terbaik ke pelanggan.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="mt-1 w-8 h-8 bg-secondary/10 text-secondary flex items-center justify-center rounded-full flex-shrink-0">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div>
+<h4 class="font-bold text-primary text-lg">Keputusan Berbasis Data</h4>
+<p class="text-on-surface-variant text-sm mt-1">Jangan menebak-nebak. Gunakan laporan analitik kami untuk menentukan menu mana yang harus dipertahankan atau dipromosikan.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="mt-1 w-8 h-8 bg-secondary/10 text-secondary flex items-center justify-center rounded-full flex-shrink-0">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div>
+<h4 class="font-bold text-primary text-lg">Skalabilitas Tanpa Batas</h4>
+<p class="text-on-surface-variant text-sm mt-1">Siap buka cabang baru? Tambahkan outlet baru hanya dalam hitungan menit tanpa setup infrastruktur yang rumit.</p>
+</div>
+</div>
+</div>
+<button class="px-8 py-4 bg-primary text-white rounded-xl font-bold hover:bg-slate-700 transition-all flex items-center gap-2 mt-4">
+                    Pelajari Lebih Lanjut
+                </button>
+</div>
+</div>
+</section>
+<!-- Final Call to Action -->
+<section class="py-20 bg-primary-container text-white text-center px-container-padding">
+<div class="max-w-4xl mx-auto space-y-8">
+<h2 class="text-page-title font-page-title">Siap Membawa Bisnis Anda ke Level Berikutnya?</h2>
+<p class="text-lg opacity-80 max-w-2xl mx-auto">
+                Dapatkan akses penuh ke semua fitur premium selama 14 hari. Tanpa perlu kartu kredit, tanpa komitmen.
+            </p>
+<div class="flex flex-col sm:flex-row justify-center gap-4 pt-4">
+<button class="px-10 py-5 bg-secondary text-on-secondary rounded-xl font-black text-lg hover:scale-105 transition-all shadow-xl shadow-secondary/20">
+                    Coba Gratis 14 Hari
+                </button>
+<button class="px-10 py-5 bg-transparent border-2 border-white/30 text-white rounded-xl font-black text-lg hover:bg-white/10 transition-all">
+                    Hubungi Sales
+                </button>
+</div>
+<p class="text-sm opacity-60">Tidak puas? Batalkan kapan saja.</p>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-primary text-on-primary">
+<div class="flex flex-col md:flex-row justify-between items-start w-full px-container-padding py-16 gap-stack-md max-w-7xl mx-auto border-b border-white/10">
+<div class="space-y-6 max-w-sm">
+<span class="text-section-title font-section-title font-bold text-secondary-fixed">Stitch POS</span>
+<p class="text-on-primary/70 text-body font-body">
+                    Solusi point-of-sale terpadu untuk efisiensi bisnis modern. Memberikan presisi dalam setiap transaksi dan kemudahan dalam setiap laporan.
+                </p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-secondary transition-colors" href="#"><span class="material-symbols-outlined text-sm">face_nod</span></a>
+<a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-secondary transition-colors" href="#"><span class="material-symbols-outlined text-sm">alternate_email</span></a>
+<a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-secondary transition-colors" href="#"><span class="material-symbols-outlined text-sm">smart_display</span></a>
+</div>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-12">
+<div class="space-y-4">
+<p class="font-bold text-white text-sm uppercase tracking-widest">Produk</p>
+<ul class="space-y-2 text-on-primary/70 text-sm">
+<li><a class="hover:text-secondary-fixed transition-colors" href="#">Fitur POS</a></li>
+<li><a class="hover:text-secondary-fixed transition-colors" href="#">Integrasi Stok</a></li>
+<li><a class="hover:text-secondary-fixed transition-colors" href="#">Laporan Keuangan</a></li>
+<li><a class="hover:text-secondary-fixed transition-colors" href="#">Update Versi</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<p class="font-bold text-white text-sm uppercase tracking-widest">Dukungan</p>
+<ul class="space-y-2 text-on-primary/70 text-sm">
+<li><a class="hover:text-secondary-fixed transition-colors" href="#">Pusat Bantuan</a></li>
+<li><a class="hover:text-secondary-fixed transition-colors" href="#">Video Tutorial</a></li>
+<li><a class="hover:text-secondary-fixed transition-colors" href="#">API Docs</a></li>
+<li><a class="hover:text-secondary-fixed transition-colors" href="#">Chat Support</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<p class="font-bold text-white text-sm uppercase tracking-widest">Legal</p>
+<ul class="space-y-2 text-on-primary/70 text-sm">
+<li><a class="hover:text-secondary-fixed transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-secondary-fixed transition-colors" href="#">Terms of Service</a></li>
+<li><a class="hover:text-secondary-fixed transition-colors" href="#">Cookies</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-container-padding py-8 gap-stack-md max-w-7xl mx-auto opacity-60 text-xs">
+<p>© 2024 Stitch POS. All rights reserved. Precision for Retail &amp; Catering.</p>
+<div class="flex gap-6">
+<span>Indonesia</span>
+<span>English</span>
+</div>
+</div>
+</footer>
+<script>
+        // Simple scroll interaction for navbar
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 20) {
+                header.classList.add('shadow-md');
+            } else {
+                header.classList.remove('shadow-md');
+            }
+        });
+    </script>
+</body></html>
