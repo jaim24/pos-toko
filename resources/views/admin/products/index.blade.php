@@ -40,6 +40,7 @@
                 <thead>
                     <tr class="border-b border-outline-variant/20 bg-surface-container-low">
                         <th class="text-left px-3 sm:px-6 py-3 sm:py-4 text-xs font-semibold text-on-surface-variant uppercase tracking-wider">Produk</th>
+                        <th class="text-left px-3 sm:px-6 py-3 sm:py-4 text-xs font-semibold text-on-surface-variant uppercase tracking-wider">Barcode</th>
                         <th class="text-left px-3 sm:px-6 py-3 sm:py-4 text-xs font-semibold text-on-surface-variant uppercase tracking-wider">Kategori</th>
                         <th class="text-right px-3 sm:px-6 py-3 sm:py-4 text-xs font-semibold text-on-surface-variant uppercase tracking-wider">Harga</th>
                         <th class="text-center px-3 sm:px-6 py-3 sm:py-4 text-xs font-semibold text-on-surface-variant uppercase tracking-wider">Stok</th>
@@ -66,6 +67,7 @@
                                 </div>
                             </div>
                         </td>
+                        <td class="px-3 sm:px-6 py-3 sm:py-4 font-mono text-[10px] sm:text-xs text-on-surface-variant">{{ $p->barcode ?? '—' }}</td>
                         <td class="px-3 sm:px-6 py-3 sm:py-4">
                             <span class="px-2 sm:px-2.5 py-1 rounded-full text-[10px] sm:text-xs font-medium bg-surface-container text-on-surface-variant">{{ $p->category->name }}</span>
                         </td>
@@ -82,7 +84,7 @@
                         </td>
                         <td class="px-3 sm:px-6 py-3 sm:py-4 text-center">
                             <div class="flex items-center justify-center gap-1 sm:gap-2">
-                                <button @click="openModal({{ $p->id }}, {{ $p->category_id }}, '{{ $p->name }}', {{ $p->price }}, {{ $p->stock }}, '{{ $p->description }}', {{ $p->is_active ? 'true' : 'false' }})"
+                                <button @click="openModal({{ $p->id }}, {{ $p->category_id }}, '{{ $p->name }}', {{ $p->price }}, {{ $p->stock }}, '{{ $p->description }}', {{ $p->is_active ? 'true' : 'false' }}, '{{ $p->barcode }}')"
                                         class="p-1.5 sm:p-2 text-on-surface-variant hover:text-secondary hover:bg-surface-container-low rounded-lg transition-colors" title="Edit">
                                     <span class="material-symbols-outlined text-base sm:text-lg">edit</span>
                                 </button>
@@ -97,7 +99,7 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="6" class="px-3 sm:px-6 py-8 sm:py-12 text-center text-on-surface-variant text-xs sm:text-sm">Belum ada produk. Tambahkan produk pertama Anda.</td>
+                        <td colspan="7" class="px-3 sm:px-6 py-8 sm:py-12 text-center text-on-surface-variant text-xs sm:text-sm">Belum ada produk. Tambahkan produk pertama Anda.</td>
                     </tr>
                     @endforelse
                 </tbody>
@@ -129,6 +131,19 @@
                     <input type="text" name="name" x-model="name" required maxlength="150"
                            class="w-full border border-outline-variant rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-secondary/20 focus:border-secondary transition-all"
                            placeholder="Contoh: Nasi Goreng">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-on-surface-variant mb-1.5">Barcode</label>
+                    <div class="flex gap-2">
+                        <input type="text" name="barcode" x-model="barcode" maxlength="50"
+                               class="flex-1 border border-outline-variant rounded-xl px-4 py-2.5 text-sm font-mono focus:ring-2 focus:ring-secondary/20 focus:border-secondary transition-all"
+                               placeholder="Scan / ketik barcode">
+                        <button type="button" @click="scanBarcode()"
+                                class="px-4 py-2.5 bg-surface-container border border-outline-variant rounded-xl text-xs font-medium text-on-surface-variant hover:bg-secondary/10 hover:text-secondary transition-colors flex items-center gap-1.5 shrink-0">
+                            <span class="material-symbols-outlined text-[16px]">barcode_scanner</span> Scan
+                        </button>
+                    </div>
+                    <p class="text-[10px] text-on-surface-variant mt-1">Kosongkan untuk auto-generate barcode EAN-13.</p>
                 </div>
                 <div>
                     <label class="block text-xs font-semibold text-on-surface-variant mb-1.5">Deskripsi</label>
@@ -183,19 +198,31 @@ function productManager() {
         filterCategory: '',
         category_id: '',
         name: '',
+        barcode: '',
         description: '',
         price: 0,
         stock: 0,
         is_active: true,
-        openModal(id = null, catId = '', name = '', price = 0, stock = 0, desc = '', active = true) {
+        openModal(id = null, catId = '', name = '', price = 0, stock = 0, desc = '', active = true, barcode = '') {
             this.editing = id;
             this.category_id = catId;
             this.name = name;
+            this.barcode = barcode;
             this.description = desc;
             this.price = price;
             this.stock = stock;
             this.is_active = active;
             this.show = true;
+            this.$nextTick(() => {
+                const inp = this.$el.querySelector('input[name="name"]');
+                if (inp) inp.focus();
+            });
+        },
+        scanBarcode() {
+            const code = prompt('Scan / masukkan kode barcode:');
+            if (code && code.trim()) {
+                this.barcode = code.trim();
+            }
         }
     }
 }

@@ -26,6 +26,8 @@ class TransactionController extends Controller
             'items_json'     => 'required|json',
             'paid_amount'    => 'required|numeric|min:0',
             'payment_method' => 'required|in:cash,qris',
+            'discount'       => 'nullable|numeric|min:0',
+            'notes'          => 'nullable|string',
         ]);
 
         $items = json_decode($request->items_json, true);
@@ -62,6 +64,9 @@ class TransactionController extends Controller
                 $product->decrement('stock', $item['qty']);
             }
 
+            $discount = round((float) $request->discount, 2);
+            $total = max(0, $total - $discount);
+
             // QRIS: treat as exact payment
             $paid   = $request->payment_method === 'qris' ? $total : round((float) $request->paid_amount, 2);
             $change = max(0, $paid - $total);
@@ -76,6 +81,7 @@ class TransactionController extends Controller
                 'total_amount'   => $total,
                 'paid_amount'    => $paid,
                 'change_amount'  => $change,
+                'discount_amount'=> $discount,
                 'payment_method' => $request->payment_method,
                 'notes'          => $request->notes,
             ]);
@@ -96,6 +102,8 @@ class TransactionController extends Controller
                     'total_fmt'      => number_format($transaction->total_amount, 0, ',', '.'),
                     'paid_fmt'       => number_format($transaction->paid_amount, 0, ',', '.'),
                     'change_fmt'     => number_format($transaction->change_amount, 0, ',', '.'),
+                    'discount_fmt'   => number_format($transaction->discount_amount, 0, ',', '.'),
+                    'notes'          => $transaction->notes,
                     'items'          => $transaction->items->map(fn($i) => [
                         'product_name'  => $i->product_name,
                         'quantity'      => $i->quantity,

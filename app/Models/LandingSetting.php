@@ -20,10 +20,4 @@ class LandingSetting extends Model
     {
         return static::pluck('value', 'key')->toArray();
     }
-
-    /** Get settings by group */
-    public static function byGroup(string $group): array
-    {
-        return static::where('group', $group)->pluck('value', 'key')->all();
-    }
 }

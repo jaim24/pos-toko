@@ -12,18 +12,39 @@
 <div class="flex w-full max-w-7xl mx-auto bg-surface-container-lowest rounded-3xl overflow-hidden shadow-2xl border border-outline-variant/20">
 
     {{-- Left Illustration Panel --}}
-    <div class="hidden lg:block lg:w-1/2 relative bg-surface-container">
-        <div class="absolute inset-0 bg-gradient-to-b from-primary/80 to-transparent z-10"></div>
-        <div class="absolute bottom-12 left-12 right-12 z-20">
-            <h2 class="text-3xl font-bold text-on-primary mb-4">Elevate Your Retail Experience</h2>
-            <p class="text-on-primary/80 text-lg">Stitch POS menyediakan alat yang mulus untuk mengelola bisnis Anda secara efektif dan indah.</p>
+    <div class="hidden lg:flex lg:w-1/2 relative bg-surface-container items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-primary via-primary/95 to-primary/80 z-10"></div>
+        {{-- Abstract shapes --}}
+        <div class="absolute top-0 right-0 w-96 h-96 bg-secondary/20 rounded-full -translate-y-1/2 translate-x-1/4 blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 w-80 h-80 bg-tertiary/15 rounded-full translate-y-1/3 -translate-x-1/3 blur-3xl"></div>
+        {{-- Grid pattern --}}
+        <div class="absolute inset-0 opacity-[0.03] z-10" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 24px 24px;"></div>
+        {{-- Content --}}
+        <div class="relative z-20 text-center px-16 py-20 max-w-lg">
+            <div class="w-16 h-16 sm:w-20 sm:h-20 bg-white/10 backdrop-blur rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-2xl border border-white/10">
+                <span class="material-symbols-outlined text-white text-3xl sm:text-4xl" style="font-variation-settings: 'FILL' 1;">storefront</span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-bold text-white mb-5 leading-tight">Kelola Bisnis Lebih Cerdas</h2>
+            <p class="text-white/70 text-base sm:text-lg leading-relaxed mb-10">Sistem POS lengkap untuk retail dan kuliner. Transaksi cepat, stok akurat, laporan real-time — semua dalam satu platform.</p>
+            <div class="grid grid-cols-3 gap-6 pt-8 border-t border-white/10">
+                <div class="text-center">
+                    <span class="material-symbols-outlined text-secondary text-2xl sm:text-3xl block mb-1">speed</span>
+                    <p class="text-white text-xs sm:text-sm font-semibold">Cepat</p>
+                </div>
+                <div class="text-center">
+                    <span class="material-symbols-outlined text-secondary text-2xl sm:text-3xl block mb-1">verified_user</span>
+                    <p class="text-white text-xs sm:text-sm font-semibold">Aman</p>
+                </div>
+                <div class="text-center">
+                    <span class="material-symbols-outlined text-secondary text-2xl sm:text-3xl block mb-1">cloud_sync</span>
+                    <p class="text-white text-xs sm:text-sm font-semibold">Cloud</p>
+                </div>
+            </div>
         </div>
-        {{-- Decorative pattern --}}
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(255,255,255,0.05)_0%,_transparent_60%)]"></div>
     </div>
 
     {{-- Right Login Panel --}}
-    <div class="w-full lg:w-1/2 flex flex-col items-center justify-center p-6 sm:p-12 md:p-16 relative">
+    <div class="w-full lg:w-1/2 flex flex-col items-center justify-center p-6 sm:p-12 md:p-16 relative" x-data="loginForm()">
         {{-- Back to Landing --}}
         <a href="{{ route('landing') }}" class="absolute top-4 sm:top-6 left-4 sm:left-6 flex items-center gap-2 text-on-surface-variant hover:text-secondary transition-colors text-xs sm:text-sm font-medium">
             <span class="material-symbols-outlined text-base sm:text-lg">arrow_back</span>
@@ -47,35 +68,49 @@
                 </header>
 
                 {{-- Demo Credentials --}}
-                <div class="mb-5 sm:mb-6 p-3 sm:p-4 bg-secondary-container/15 border border-secondary/20 rounded-xl">
-                    <p class="text-xs font-semibold text-on-surface-variant uppercase tracking-wider mb-3">Kredensial Demo</p>
-                    <div class="space-y-2 sm:space-y-2.5">
-                        <div class="flex flex-col sm:grid sm:grid-cols-[auto_1fr] gap-x-3 gap-y-0.5 text-sm">
-                            <span class="text-xs font-semibold text-secondary bg-secondary/10 px-2 py-0.5 rounded-md self-start w-fit mb-1 sm:mb-0">ADMIN</span>
-                            <div>
-                                <span class="text-on-surface text-xs font-mono select-all cursor-text">admin@stitchpos.com</span>
-                                <span class="text-outline mx-2">/</span>
-                                <span class="text-on-surface text-xs font-mono select-all cursor-text">password</span>
-                            </div>
+                <div class="mb-5 sm:mb-6 bg-secondary-container/15 border border-secondary/20 rounded-xl overflow-hidden">
+                    <button type="button" @click="demoOpen = !demoOpen"
+                            class="w-full p-3 sm:p-4 flex items-center justify-between text-left hover:bg-secondary-container/10 transition-colors">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-secondary text-lg">info</span>
+                            <p class="text-xs font-semibold text-on-surface-variant uppercase tracking-wider">Kredensial Demo</p>
                         </div>
-                        <div class="flex flex-col sm:grid sm:grid-cols-[auto_1fr] gap-x-3 gap-y-0.5 text-sm">
-                            <span class="text-xs font-semibold text-amber-600 bg-amber-100 px-2 py-0.5 rounded-md self-start w-fit mb-1 sm:mb-0">KASIR</span>
-                            <div>
-                                <span class="text-on-surface text-xs font-mono select-all cursor-text">kasir@stitchpos.com</span>
-                                <span class="text-outline mx-2">/</span>
-                                <span class="text-on-surface text-xs font-mono select-all cursor-text">password</span>
+                        <span class="material-symbols-outlined text-on-surface-variant text-lg transition-transform duration-200" :class="demoOpen ? 'rotate-180' : ''">expand_more</span>
+                    </button>
+                    <div x-show="demoOpen" x-collapse>
+                        <div class="px-3 sm:px-4 pb-3 sm:pb-4 space-y-2 sm:space-y-2.5">
+                            <div class="flex flex-col sm:grid sm:grid-cols-[auto_1fr] gap-x-3 gap-y-0.5 text-sm">
+                                <span class="text-xs font-semibold text-secondary bg-secondary/10 px-2 py-0.5 rounded-md self-start w-fit mb-1 sm:mb-0">ADMIN</span>
+                                <div>
+                                    <span class="text-on-surface text-xs font-mono select-all cursor-text">admin@stitchpos.com</span>
+                                    <span class="text-outline mx-2">/</span>
+                                    <span class="text-on-surface text-xs font-mono select-all cursor-text">password</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col sm:grid sm:grid-cols-[auto_1fr] gap-x-3 gap-y-0.5 text-sm">
+                                <span class="text-xs font-semibold text-amber-600 bg-amber-100 px-2 py-0.5 rounded-md self-start w-fit mb-1 sm:mb-0">KASIR</span>
+                                <div>
+                                    <span class="text-on-surface text-xs font-mono select-all cursor-text">kasir@stitchpos.com</span>
+                                    <span class="text-outline mx-2">/</span>
+                                    <span class="text-on-surface text-xs font-mono select-all cursor-text">password</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 @if($errors->any())
-                    <div class="mb-5 sm:mb-6 p-3 sm:p-4 bg-error-container text-on-error-container rounded-lg">
-                        <p class="text-xs sm:text-sm font-medium">{{ $errors->first() }}</p>
+                    <div class="mb-5 sm:mb-6 p-3 sm:p-4 bg-error-container text-on-error-container rounded-lg" x-data="{ locked: {{ str_contains($errors->first(), 'terkunci') ? 'true' : 'false' }}, countdown: 0 }" x-init="if (locked) { countdown = 15 * 60; const i = setInterval(() => { if (countdown <= 0) { clearInterval(i); locked = false; } else { countdown-- } }, 1000) }">
+                        <p class="text-xs sm:text-sm font-medium">
+                            {{ $errors->first() }}
+                            <span x-show="locked && countdown > 0" class="font-mono font-bold">
+                                (<span x-text="Math.floor(countdown/60)"></span>:<span x-text="String(countdown%60).padStart(2,'0')"></span>)
+                            </span>
+                        </p>
                     </div>
                 @endif
 
-                <form action="{{ route('login') }}" method="POST" class="space-y-5 sm:space-y-6">
+                <form action="{{ route('login') }}" method="POST" class="space-y-5 sm:space-y-6" @submit="submitting = true">
                     @csrf
 
                     {{-- Email Field --}}
@@ -127,22 +162,27 @@
                                    class="w-4 h-4 rounded border-outline-variant text-secondary focus:ring-secondary cursor-pointer">
                             <span class="ml-2 text-xs sm:text-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Ingat saya</span>
                         </label>
-                        <a href="#" class="text-xs sm:text-sm text-secondary hover:text-secondary/80 font-medium transition-colors">Lupa password?</a>
+                        <a href="{{ route('password.request') }}" class="text-xs sm:text-sm text-secondary hover:text-secondary/80 font-medium transition-colors">Lupa password?</a>
                     </div>
 
                     {{-- Submit Button --}}
-                    <button type="submit"
+                    <button type="submit" :disabled="submitting"
                             class="w-full py-3 sm:py-3.5 bg-secondary text-white text-base sm:text-lg font-bold rounded-lg
                                    hover:bg-secondary/90 active:scale-[0.98] transition-all duration-200
-                                   shadow-md shadow-secondary/20 flex items-center justify-center gap-2 mt-4">
-                        Masuk
-                        <span class="material-symbols-outlined text-lg sm:text-xl">arrow_forward</span>
+                                   shadow-md shadow-secondary/20 flex items-center justify-center gap-2 mt-4
+                                   disabled:opacity-60 disabled:cursor-wait disabled:hover:bg-secondary disabled:active:scale-100">
+                        <template x-if="!submitting">
+                            <span class="inline-flex items-center gap-2">Masuk <span class="material-symbols-outlined text-lg sm:text-xl">arrow_forward</span></span>
+                        </template>
+                        <template x-if="submitting">
+                            <span class="inline-flex items-center gap-2"><span class="material-symbols-outlined text-lg sm:text-xl animate-spin">progress_activity</span> Memproses...</span>
+                        </template>
                     </button>
                 </form>
 
                 <footer class="mt-8 sm:mt-10 pt-5 sm:pt-6 border-t border-outline-variant/30 text-center">
                     <p class="text-xs sm:text-sm text-on-surface-variant">
-                        Belum punya akun? <a class="text-secondary font-semibold hover:underline" href="#">Hubungi Admin</a>
+                        Belum punya akun? <a class="text-secondary font-semibold hover:underline" href="{{ route('contact.admin') }}">Hubungi Admin</a>
                     </p>
                 </footer>
             </div>
@@ -155,6 +195,15 @@
         </main>
     </div>
 </div>
+
+<script>
+function loginForm() {
+    return {
+        submitting: false,
+        demoOpen: false,
+    };
+}
+</script>
 
 </body>
 </html>

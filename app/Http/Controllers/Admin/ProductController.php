@@ -7,7 +7,6 @@ use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -23,6 +22,7 @@ class ProductController extends Controller
         $data = $request->validate([
             'category_id' => 'required|exists:categories,id',
             'name'        => 'required|string|max:150',
+            'barcode'     => 'nullable|string|max:50|unique:products,barcode',
             'description' => 'nullable|string',
             'price'       => 'required|numeric|min:1',
             'stock'       => 'required|integer|min:0',
@@ -48,6 +48,7 @@ class ProductController extends Controller
         $data = $request->validate([
             'category_id' => 'required|exists:categories,id',
             'name'        => 'required|string|max:150',
+            'barcode'     => 'nullable|string|max:50|unique:products,barcode,' . $product->id,
             'description' => 'nullable|string',
             'price'       => 'required|numeric|min:1',
             'stock'       => 'required|integer|min:0',
@@ -73,5 +74,37 @@ class ProductController extends Controller
     {
         $product->delete();
         return back()->with('success', 'Produk berhasil dihapus.');
+    }
+
+    /**
+     * AJAX: Lookup product by barcode for scanner input.
+     */
+    public function lookupByBarcode(Request $request)
+    {
+        $code = trim($request->input('code', ''));
+        if ($code === '') {
+            return response()->json(['found' => false]);
+        }
+
+        $product = Product::where('barcode', $code)
+            ->orWhere('id', $code)
+            ->where('is_active', true)
+            ->where('stock', '>', 0)
+            ->first();
+
+        if (!$product) {
+            return response()->json(['found' => false]);
+        }
+
+        return response()->json([
+            'found' => true,
+            'product' => [
+                'id'    => $product->id,
+                'name'  => $product->name,
+                'price' => $product->price,
+                'stock' => $product->stock,
+                'barcode' => $product->barcode,
+            ],
+        ]);
     }
 }
